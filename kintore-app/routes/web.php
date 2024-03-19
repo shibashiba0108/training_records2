@@ -35,4 +35,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// 新しいダッシュボードページのルート
+Route::get('/trainingrecords', function () {
+    return view('trainingrecords');
+})->middleware(['auth'])->name('trainingrecords');
+
 require __DIR__.'/auth.php';
