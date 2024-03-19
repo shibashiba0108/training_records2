@@ -1,13 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
-class TrainingRecordController extends Controller
+class TrainingRecordsController extends Controller
 {
-    public function training_records()
-    {
-        return view ('training_records');
+    public function getTrainingRecords(Request $request){
+        return Inertia::render('TrainingRecords', [
+            'TrainingRecords' => $request->only(
+              'bodypart',
+              'exercise',
+              'weight',
+              'sets',
+              'reps'
+            ),
+        ]);
     }
 }

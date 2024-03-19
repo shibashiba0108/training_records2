@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TrainingRecordsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,9 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// 新しいダッシュボードページのルート
-Route::get('/trainingrecords', function () {
-    return view('trainingrecords');
-})->middleware(['auth'])->name('trainingrecords');
+// /training_recordsにアクセスするとブラウザ上にTraining＿Recordsの一覧が表示される
+Route::get('/trainingrecords','App\Http\Controllers\TrainingRecordsController@getTrainingRecords');
+    Route::get('/trainingrecords', [TrainingRecordsController::class, 'getTrainingRecords'])
+    ->middleware(['auth', 'verified'])->name('trainingrecords.getTrainingRecords');
 
 require __DIR__.'/auth.php';

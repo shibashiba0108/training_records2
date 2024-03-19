@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('training_records', function (Blueprint $table) {
             $table->id();
-            $table->string('body_part'); // 鍛える部位名
-            $table->string('exercise_name'); // 種目名
+            $table->string('body_part'); // 鍛える部位
+            $table->string('exercise'); // 種目
             $table->integer('weight'); // 重さ
             $table->integer('sets'); // セット数
             $table->integer('reps'); // レップ数
