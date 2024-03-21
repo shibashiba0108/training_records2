@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainingRecordsController;
+use App\Http\Controllers\TrainingRecordsListController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -40,5 +41,9 @@ Route::middleware('auth')->group(function () {
 Route::get('/trainingrecords','App\Http\Controllers\TrainingRecordsController@getTrainingRecords');
     Route::get('/trainingrecords', [TrainingRecordsController::class, 'getTrainingRecords'])
     ->middleware(['auth', 'verified'])->name('trainingrecords.getTrainingRecords');
+
+Route::get('/trainingrecordslist','App\Http\Controllers\TrainingRecordsListController@getTrainingRecordsList');
+    Route::get('/trainingrecordslist', [TrainingRecordsListController::class, 'getTrainingRecordsList'])
+    ->middleware(['auth', 'verified'])->name('trainingrecordslist.getTrainingRecordsList');
 
 require __DIR__.'/auth.php';

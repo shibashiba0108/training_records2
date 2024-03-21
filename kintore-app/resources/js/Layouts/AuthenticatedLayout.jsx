@@ -119,7 +119,7 @@ export default function Authenticated({ user, header, children }) {
                 </header>
             )}
 
-            <main>{children}</main>
+            <main>{children}<Link href="/trainingrecords">WORKOUT!</Link></main>
         </div>
     );
 }

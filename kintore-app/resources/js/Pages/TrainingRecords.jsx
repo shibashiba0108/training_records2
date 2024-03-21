@@ -56,7 +56,7 @@ export default function TrainingRecords({ auth }) {
                                     value={reps}
                                     onChange={(e) => setReps(e.target.value)}
                                 />
-                                <button type="submit">Add Workout</button>
+                                <button type="submit">トレーニングを追加</button>
                             </form>
                         </div>
                     </div>
