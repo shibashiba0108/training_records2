@@ -1,7 +1,13 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 
 export default function Dashboard({ auth }) {
+    const init = () => {
+        localStorage.setItem('user',auth.user);
+    }
+
+    init()
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -9,11 +15,12 @@ export default function Dashboard({ auth }) {
         >
             <Head title="Dashboard" />
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">TrainingRecords</div>
-                        <button>Let`s Training</button>
+            <div className="p-8">
+                <div className="max-w-48 mx-auto">
+                    <div className="bg-sky-300 shadow-sm sm:rounded-md">
+                        <div className="p-6 text-gray-900">
+                            <Link href="/trainingrecords">TrainingRecords</Link>
+                        </div>
                     </div>
                 </div>
             </div>

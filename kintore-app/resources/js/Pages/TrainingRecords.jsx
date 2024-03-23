@@ -1,25 +1,56 @@
 import { useState } from 'react';
 import Layout from '@/Layouts/Layout'
 import { Head } from '@inertiajs/react'
+import RecordRepository from '@/repositories/record_repository';
+import TrainingRecordsList from './TrainingRecordsList';
 
 export default function TrainingRecords({ auth }) {
-    const handleSubmit = () => {
-        console.log(1);
-    }
     
-    const [body_part, setBody_part] = useState('Body_part');
-    const [exercise, setExercise] = useState('Exercise');
+    const [body_part, setBody_part] = useState('');
+    const [exercise, setExercise] = useState('');
     const [weight, setWeight] = useState('Weight');
     const [sets, setSets] = useState('Sets');
     const [reps, setReps] = useState('Reps');
+    const [total,setTotal] = useState({});
+
+    const handleSubmit = (event) => {
+        //ページのリローディング機能を無くす
+        event.preventDefault()
+        setTotal({
+            body_part: body_part,
+            exercise: exercise,
+            weight: weight,
+            sets: sets,
+            reps: reps,
+        })
+        const params = {
+            body_part: body_part,
+            exercise: exercise,
+            weight: weight,
+            sets: sets,
+            reps: reps,
+            userid: auth.user.id,
+        }
+        postRecord(params);
+    }
+console.log(auth.user.id);
+    // API
+    // 記録保存
+    const postRecord = async (params) => {
+        await RecordRepository.postRecord(params)
+            .then(data => {
+                console.log(params)
+            }).catch(err => {
+                alert('記録の保存に失敗しました。')
+                console.log(err)
+            }).finally(() => {
+            })
+            localStorage.setItem('userId','shiba')
+    }
 
     return (
         <Layout>
             <Head title="トレーニング記録" />
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
                             <form onSubmit={handleSubmit}>
                                 {/* 部位 */}
                                 <input
@@ -56,12 +87,9 @@ export default function TrainingRecords({ auth }) {
                                     value={reps}
                                     onChange={(e) => setReps(e.target.value)}
                                 />
-                                <button type="submit">Add Workout</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                <button type="submit">トレーニングを記録</button>
+                                {/* <p>{auth.user}</p> */}
+                            </form>            
         </Layout>
     );
 }

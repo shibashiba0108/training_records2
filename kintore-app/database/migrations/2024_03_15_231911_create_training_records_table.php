@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('trainingrecords', function (Blueprint $table) {
+        Schema::create('training_records', function (Blueprint $table) {
             $table->id();
-            $table->string('bodypart'); // 鍛える部位
-            $table->string('exercise'); // 種目
-            $table->integer('weight'); // 重さ
-            $table->integer('sets'); // セット数
-            $table->integer('reps'); // レップ数
-            $table->timestamps(); // 作成日時と更新日時
+            $table->timestamps();
         });
     }
 
