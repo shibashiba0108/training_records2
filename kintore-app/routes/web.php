@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainingRecordsController;
-use App\Http\Controllers\TrainingRecordsListController;
+use App\Http\Controllers\Record\ListController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\TrainingRecord;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,13 +38,25 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// /training_recordsにアクセスするとブラウザ上にTraining＿Recordsの一覧が表示される
 Route::get('/trainingrecords','App\Http\Controllers\TrainingRecordsController@getTrainingRecords');
     Route::get('/trainingrecords', [TrainingRecordsController::class, 'getTrainingRecords'])
     ->middleware(['auth', 'verified'])->name('trainingrecords.getTrainingRecords');
+    Route::get('/', function () {
+        $trainingrecords = TrainingRecord::all(); // データベースからユーザーデータを取得
+        return Inertia::render('/trainingrecords', ['trainingrecords' => $trainingrecords]);
+    });
 
-Route::get('/trainingrecordslist','App\Http\Controllers\TrainingRecordsListController@getTrainingRecordsList');
-    Route::get('/trainingrecordslist', [TrainingRecordsListController::class, 'getTrainingRecordsList'])
-    ->middleware(['auth', 'verified'])->name('trainingrecordslist.getTrainingRecordsList');
+Route::get('/list','App\Http\Controllers\ListController@getListRecord');
+    Route::get('/list', [ListController::class, 'getListRecord'])
+    ->middleware(['auth', 'verified'])->name('list.getListRecord');
+
+Route::get('/', function () {
+    return Inertia::render('Welcome', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'laravelVersion' => Application::VERSION,
+            'phpVersion' => PHP_VERSION,
+    ]);
+});
 
 require __DIR__.'/auth.php';

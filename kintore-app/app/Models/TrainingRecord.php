@@ -11,7 +11,7 @@ class TrainingRecord extends Model
 
     protected $fillable = [
         "body_part",
-        "exercise",
+        "exercise_name",
         "weight",
         "sets",
         "reps",

@@ -12,7 +12,6 @@ function Main() {
 
   return (
     <div className="App">
-      <h1>My Workout Portfolio</h1>
       <TrainingRecords addWorkout={addWorkout} />
       <TrainingRecordsList workouts={workouts} />
     </div>
