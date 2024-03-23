@@ -15,9 +15,4 @@ class TrainingRecordList extends Model
         "sets",
         "reps",
     ];
-
-    public function TrainingRecordsList()
-    {
-        return $this->belongsTo('App\Models\TrainingRecords');
-    }
 }

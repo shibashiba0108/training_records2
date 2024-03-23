@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ListController extends Controller
 {
-    public function getListRecord(Request $request){
+    public function getRecordList(Request $request){
         $record = TrainingRecordList::create($request->all());
             $record = new TrainingRecordList();
         $result = $record->fill([

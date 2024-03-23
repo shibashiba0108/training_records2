@@ -15,6 +15,7 @@ class TrainingRecord extends Model
         "weight",
         "sets",
         "reps",
+        "userid",
     ];
 
     public function TrainingRecords()

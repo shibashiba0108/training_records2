@@ -2,6 +2,12 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 
 export default function Dashboard({ auth }) {
+    const init = () => {
+        localStorage.setItem('user',auth.user);
+    }
+
+    init()
+
     return (
         <AuthenticatedLayout
             user={auth.user}

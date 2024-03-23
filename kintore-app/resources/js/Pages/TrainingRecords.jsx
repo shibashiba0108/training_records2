@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Layout from '@/Layouts/Layout'
 import { Head } from '@inertiajs/react'
 import RecordRepository from '@/repositories/record_repository';
+import TrainingRecordsList from './TrainingRecordsList';
 
 export default function TrainingRecords({ auth }) {
     
@@ -28,16 +29,17 @@ export default function TrainingRecords({ auth }) {
             weight: weight,
             sets: sets,
             reps: reps,
+            userid: auth.user.id,
         }
         postRecord(params);
     }
-
+console.log(auth.user.id);
     // API
     // 記録保存
     const postRecord = async (params) => {
         await RecordRepository.postRecord(params)
             .then(data => {
-                console.log(data)
+                console.log(params)
             }).catch(err => {
                 alert('記録の保存に失敗しました。')
                 console.log(err)
@@ -86,8 +88,8 @@ export default function TrainingRecords({ auth }) {
                                     onChange={(e) => setReps(e.target.value)}
                                 />
                                 <button type="submit">トレーニングを記録</button>
-                            </form>
-                        
+                                {/* <p>{auth.user}</p> */}
+                            </form>            
         </Layout>
     );
 }
